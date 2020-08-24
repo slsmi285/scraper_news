@@ -26,6 +26,9 @@ router.get("/scrape", function(req, res) {
       result.link = $(this)
         .children("a")
         .attr("href");
+        result.image = $(this)
+        .children("a")
+        .attr("href");
 
       if (result.title !== "" && result.link !== "") {
         if (titlesArray.indexOf(result.title) == -1) {
@@ -85,7 +88,7 @@ router.get("/clearAll", function(req, res) {
       console.log("removed all articles");
     }
   });
-  res.redirect("/articles-json");
+  res.redirect("/articles");
 });
 
 router.get("/readArticle/:id", function(req, res) {
@@ -112,7 +115,7 @@ router.get("/readArticle/:id", function(req, res) {
               .children("p")
               .text();
 
-            res.render("article", hbsObj);
+            res.render("articles", hbsObj);
             return false;
           });
         });
@@ -148,9 +151,17 @@ router.post("/comment/:id", function(req, res) {
         } else {
           res.redirect("/readArticle/" + articleId);
         }
-      });
-    }
+      
+        {
+          allowedProtoMethods: {
+            trim: true
+          }
+        }
+        });
+      }
+    });
   });
-});
+
+  
 
 module.exports = router;

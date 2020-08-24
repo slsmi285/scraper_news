@@ -28,5 +28,8 @@
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "handlebars": "^4.5.0"
   }
 }
