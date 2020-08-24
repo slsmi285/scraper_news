@@ -1,0 +1,31 @@
+{
+  "name": "scraper_news",
+  "version": "1.0.0",
+  "description": "Using Nodejs, Express Handelbars, MongoDB and Cheerio, scraping news articles.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slsmi285/scraper_news.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slsmi285/scraper_news/issues"
+  },
+  "homepage": "https://github.com/slsmi285/scraper_news#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.10.0",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  }
+}
