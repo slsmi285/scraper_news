@@ -20,13 +20,13 @@ In this app, it will "scrape" a news article headlines.  A user can "scrape" to 
 ## Screenshots
 
 
-![Scrape Page](https://github.com/slsmi285/Eat-Da-Burger/blob/master/public/assets/images/terminal%20entry%20logs.PNG)
+![Scrape Page](https://github.com/slsmi285/scraper_news/blob/master/public/assets/img/scrape%20page.PNG)
 
-![Terminal Logs](https://github.com/slsmi285/Eat-Da-Burger/blob/master/public/assets/images/Sequel.PNG)
+![Terminal Logs](https://github.com/slsmi285/scraper_news/blob/master/public/assets/img/terminal%20log.PNG)
 
-![ReadArticle/CommentPage](https://stark-sierra-31142.herokuapp.com)
+![ReadArticle/CommentPage](https://github.com/slsmi285/scraper_news/blob/master/public/assets/img/read%20article.PNG)
 
-[Heroku Link](https://stark-sierra-31142.herokuapp.com)
+[Heroku Link](https://vast-spire-84282.herokuapp.com/)
 
 #### Directory structure
 
