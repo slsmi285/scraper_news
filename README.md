@@ -14,7 +14,7 @@ In this app, it will "scrape" a news article headlines.  A user can "scrape" to 
 - Cheerio
 - Axios
 
-[App link](https://slsmi285.github.io/scraper_news/)
+
 
 
 ## Screenshots
