@@ -33,7 +33,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
+db.once("open", function () {
   console.log("Connected to Mongoose!");
 });
 
@@ -43,6 +43,6 @@ app.use("/", routes);
 
 //Create localhost port
 var port = process.env.PORT || 3000;
-app.listen(port, function() {
+app.listen(port, function () {
   console.log("Listening on PORT " + port);
 });
