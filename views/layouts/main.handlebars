@@ -10,18 +10,25 @@
     {{!-- Google Font --}}
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <!-- tab icon -->
-    <link rel="shortcut icon" href="#" />
+    
     <title>Scraper News Network</title>
 </head>
 
 <body>
 
     {{> nav/_navbar}}
+    <div>
+        <div class="jumbotron center-align">
+            <h1 id="hdr">MongoDB Scraper</h1>
+            <p>Click 'Scrape' to get the latest articles from NY Time</p>
+        </div>
+    </div>
 
     <main>
         <div class="container">
             {{{ body }}}
         </div>
+
     </main>
 
     {{> _footer}}

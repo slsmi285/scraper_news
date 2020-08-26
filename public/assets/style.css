@@ -1,3 +1,16 @@
+.jumbotron {
+  background-image: url("./img/coffee.jpg");
+  background-repeat: no-repeat;
+  background-image: cover;
+  background-position-x: center;
+  height: 300px;
+  color: red;
+}
+.card {
+  background-color: transparent;
+  height: 100px;
+  color: grey;
+}
 body {
     background-size: 600px;
     font-family: "Oswald", sans-serif;
@@ -5,8 +18,9 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: black;
+   background-color: grey;
   }
+
   main {
     flex: 1 0 auto;
   }

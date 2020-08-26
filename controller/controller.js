@@ -5,18 +5,21 @@ var path = require("path");
 var request = require("request");
 var cheerio = require("cheerio");
 
+//connections to models
 var Comment = require("../models/Comment.js");
 var Article = require("../models/Article.js");
 
+//create routes
 router.get("/", function(req, res) {
   res.redirect("/articles");
 });
 
+//get request, similar router to above, but this will be to scrape the verge
 router.get("/scrape", function(req, res) {
   request("http://www.theverge.com", function(error, response, html) {
     var $ = cheerio.load(html);
     var titlesArray = [];
-
+//using class tag from site for every article
     $(".c-entry-box--compact__title").each(function(i, element) {
       var result = {};
 
@@ -26,11 +29,11 @@ router.get("/scrape", function(req, res) {
       result.link = $(this)
         .children("a")
         .attr("href");
-        result.image = $(this)
-        .children("a")
-        .attr("href");
+    
+      
+   
 
-      if (result.title !== "" && result.link !== "") {
+      if (result.title !== "" && result.link !== "" ) {
         if (titlesArray.indexOf(result.title) == -1) {
           titlesArray.push(result.title);
 
@@ -57,6 +60,8 @@ router.get("/scrape", function(req, res) {
     res.redirect("/");
   });
 });
+
+//grab every article and populate the DOM in /articles end point
 router.get("/articles", function(req, res) {
   Article.find().lean()
     .sort({ _id: -1 })
@@ -69,7 +74,7 @@ router.get("/articles", function(req, res) {
       }
     });
 });
-
+//make the articles json route -- it will get the articles scraped from mongodb into json
 router.get("/articles-json", function(req, res) {
   Article.find({}, function(err, doc) {
     if (err) {
@@ -79,7 +84,7 @@ router.get("/articles-json", function(req, res) {
     }
   });
 });
-
+//clear out json
 router.get("/clearAll", function(req, res) {
   Article.remove({}, function(err, doc) {
     if (err) {
@@ -90,14 +95,14 @@ router.get("/clearAll", function(req, res) {
   });
   res.redirect("/articles");
 });
-
+//read article route, identified with an id to drill down to a specific article
 router.get("/readArticle/:id", function(req, res) {
   var articleId = req.params.id;
   var hbsObj = {
     article: [],
     body: []
   };
-
+//grab article by id and grab by link, puts it in handlebars
   Article.findOne({ _id: articleId })
     .populate("comment")
     .exec(function(err, doc) {
@@ -115,13 +120,14 @@ router.get("/readArticle/:id", function(req, res) {
               .children("p")
               .text();
 
-            res.render("articles", hbsObj);
+            res.render("article", hbsObj);
             return false;
           });
         });
       }
     });
 });
+//create area for user to put comments in and to be displayed from mongodb, using form, need route to be a post
 router.post("/comment/:id", function(req, res) {
   var user = req.body.name;
   var content = req.body.comment;
@@ -141,7 +147,7 @@ router.post("/comment/:id", function(req, res) {
       console.log(doc._id);
       console.log(articleId);
 
-      Article.findOneAndUpdate(
+      Article.findByIdAndUpdate(
         { _id: req.params.id },
         { $push: { comment: doc._id } },
         { new: true }
@@ -149,14 +155,11 @@ router.post("/comment/:id", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect("/readArticle/" + articleId);
+          res.redirect("/readArticle" + articleId);
         }
       
-        {
-          allowedProtoMethods: {
-            trim: true
-          }
-        }
+      
+      
         });
       }
     });

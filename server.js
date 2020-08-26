@@ -2,7 +2,7 @@
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var logger = require("morgan");
-dotenv
+
 
 //initialize Express app
 var express = require("express");
@@ -14,8 +14,11 @@ app.use(
     extended: false
   })
 );
-
+app.use(express.json());
+//app.use(express.static('img'));
+//connect to public folder, create the path
 app.use(express.static(process.cwd() + "/public"));
+
 //Require set up handlebars
 var exphbs = require("express-handlebars");
 app.engine(
@@ -32,6 +35,8 @@ const MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
+//create db to hold the connection
+
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
@@ -40,6 +45,7 @@ db.once("open", function() {
 
 var routes = require("./controller/controller.js");
 app.use("/", routes);
+
 //Create localhost port
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
