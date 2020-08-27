@@ -103,13 +103,14 @@ router.get("/readArticle/:id", function(req, res) {
     body: []
   };
 //grab article by id and grab by link, puts it in handlebars
-  Article.findOne({ _id: articleId })
+  Article.findOne({ _id: articleId }).lean()
     .populate("comment")
     .exec(function(err, doc) {
       if (err) {
         console.log("Error: " + err);
       } else {
         hbsObj.article = doc;
+        console.log(doc);
         var link = doc.link;
         request(link, function(error, response, html) {
           var $ = cheerio.load(html);
@@ -155,7 +156,7 @@ router.post("/comment/:id", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          res.redirect("/readArticle" + articleId);
+          res.redirect("/readArticle/" + articleId);
         }
       
       
